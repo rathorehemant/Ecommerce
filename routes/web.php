@@ -19,3 +19,4 @@ Route::get('/', function () {
 
 Route::get('/products', [ProductController::class, 'productsListing'])->name('product.listing');
 Route::get('/add-products', [ProductController::class, 'productsAdding'])->name('product.adding');
+Route::post('/save-products', [ProductController::class, 'saveProducts'])->name('product.save');
