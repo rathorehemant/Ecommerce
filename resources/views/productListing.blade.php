@@ -11,6 +11,7 @@
             <tr>
                 <th>Name</th>
                 <th>Image</th>
+                <th>Product Slug</th>
                 <th>Price</th>
                 <th>Added On</th>
             </tr>
@@ -20,6 +21,7 @@
             <tr>
                 <td>{{ ucfirst($product->title) }}</td>
                 <td><img src="{{ $product->image }}" class="img-thumbnail" height = "150" width = "130" alt="Product Image"></td>
+                <td>{{ $product->slug }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->created_at }}</td>
             </tr>

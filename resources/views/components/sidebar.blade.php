@@ -38,14 +38,14 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle {{ route('product.listing') == request()->url() ? '' : 'collapsed' }}">
+                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle {{ route('product.listing') == request()->url() || route('product.adding') == request()->url()  ? '' : 'collapsed' }}">
                             <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
-                            <ul class="collapse nav flex-column ms-1 {{ route('product.listing') == request()->url() ? 'show' : '' }}" id="submenu3" data-bs-parent="#menu">
+                            <ul class="collapse nav flex-column ms-1 {{ route('product.listing') == request()->url() || route('product.adding') == request()->url() ? 'show' : '' }}" id="submenu3" data-bs-parent="#menu">
                             <li class="w-100">
                                 <a href="{{ route('product.listing')}}" class="nav-link px-0"> <span class="d-none d-sm-inline">All Products</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Add Product</span></a>
+                                <a href="{{ route('product.adding')}}" class="nav-link px-0"> <span class="d-none d-sm-inline">Add Product</span></a>
                             </li>
                             <li>
                                 <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
