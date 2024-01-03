@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique;
             $table->string('image');
-            $table->text('gallary_image');
-            $table->text('price');
+            $table->text('gallary_image')->nullable();
+            $table->double('price');
+            $table->text('categoryId')->nullable();
             $table->timestamps();
         });
     }
