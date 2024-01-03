@@ -16,9 +16,17 @@ class Product extends Model
     {
         parent::boot();
 
-        // Generate and set the slug before creating a new product
-        static::creating(function ($product) {
-            $product->slug = Str::slug($product->title);
-        });
+    // Generate and set the unique slug before creating a new product
+    static::creating(function ($product) {
+        $slug = Str::slug($product->title);
+
+        $count = static::where('slug', 'LIKE', $slug . '%')->count();
+
+        if ($count > 0) {
+            $product->slug = $slug . '-' . ($count + 1);
+        } else {
+            $product->slug = $slug;
+        }
+    });
     }
 }

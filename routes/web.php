@@ -19,4 +19,11 @@ Route::get('/', function () {
 
 Route::get('/products', [ProductController::class, 'productsListing'])->name('product.listing');
 Route::get('/add-products', [ProductController::class, 'productsAdding'])->name('product.adding');
+Route::get('/products/categories', [ProductController::class, 'productsCategoryListing'])->name('product.category.listing');
+Route::get('/products/add-categories', [ProductController::class, 'productsCategoryAdding'])->name('product.category.adding');
 Route::post('/save-products', [ProductController::class, 'saveProducts'])->name('product.save');
+Route::post('/products/save-categories', [ProductController::class, 'saveproductsCategory'])->name('product.category.save');
+Route::delete('/delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('product.delete');
+Route::delete('/delete-product-category/{id}', [ProductController::class, 'deleteProductCategory'])->name('product.delete');
+
+
