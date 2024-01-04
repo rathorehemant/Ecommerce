@@ -17,7 +17,8 @@ class ProductController extends Controller
     }
 
     public function productsAdding(){
-        return view('productAdding');
+        $products_categories = Product_category::ALL();
+        return view('productAdding',['products_categories'=>$products_categories]);
     }
 
     public function saveProducts(Request $request){
@@ -25,6 +26,9 @@ class ProductController extends Controller
             'title' => 'required|string|max:255',
             'productImage' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'price' => 'required|numeric|min:1',
+            'productCategory' => 'required',
+            'product_description' => 'required|string',
+            'stock' => 'required|numeric|min:1',
         ]);
 
         if ($validator->fails()) {
@@ -32,16 +36,36 @@ class ProductController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }else{
-           
+           // for single product image
             $product_image = $request->file('productImage');
              $product_image_new_name = time().'.'.$product_image->getClientOriginalExtension();
              // Save the original image
-             $product_image->move(public_path('product_image'), $product_image_new_name);
+             $product_image->move(public_path('product_images'), $product_image_new_name);
+
+
+             // for the product gallary image which can be more then 1
+             $imageNames = [];
+
+             if ($request->hasFile('gallaryImage')) {
+                 foreach ($request->file('gallaryImage') as $product_image) {
+                     $product_image_new_name = time() . '_' . $product_image->getClientOriginalName();
+                     $product_image->move(public_path('gallaryImages'), $product_image_new_name);
+             
+                     $imageNames[] = 'gallaryImages/' . $product_image_new_name;
+                 }
+             }
+
+            $gallary_image= implode(',', $imageNames);
+            
             $product=Product::create([
 
                 'title' =>  $request->input('title'),
                 'price' =>  $request->input('price'),
-                'image' => 'product_image/'.$product_image_new_name
+                'image' => 'product_images/'.$product_image_new_name,
+                'categoryId' =>   $request->input('productCategory'),
+                'gallary_image' =>$gallary_image,
+                'description' =>  $request->input('product_description'),
+                'stocks' => $request->input('stock')
 
             ]);
 
