@@ -1,4 +1,5 @@
 
+// for single product image
 const imageInput = document.getElementById('imageUpload');
 const previewImage = document.getElementById('preview-image');
 const resetButton = document.getElementById('reset-button');
@@ -155,3 +156,69 @@ $('.delete_product').on('click', function () {
 
     
   });
+
+
+
+  // for gallary image 
+
+  var previewContainer = document.getElementById('image-preview-container');
+
+  if(previewContainer){
+  function previewImages() {
+    var previewContainer = document.getElementById('image-preview-container');
+    var files = document.getElementById('galleryImage').files;
+
+    previewContainer.innerHTML = ''; // Clear existing preview
+
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var reader = new FileReader();
+
+        reader.onload = (function (file) {
+            return function (e) {
+                var imgContainer = document.createElement('div');
+                imgContainer.className = 'image-container';
+
+                var img = document.createElement('img');
+                img.className = 'uploaded-image';
+                img.src = e.target.result;
+
+                var closeButton = document.createElement('button');
+                closeButton.className = 'close-button';
+                closeButton.innerHTML = 'x';
+                closeButton.onclick = function () {
+                    removeImage(imgContainer, file);
+                };
+
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(closeButton);
+
+                previewContainer.appendChild(imgContainer);
+            };
+        })(file);
+
+        reader.readAsDataURL(file);
+    }
+}
+
+function removeImage(container, file) {
+  container.parentNode.removeChild(container);
+
+  // Reset the file input value and files array
+  var inputElement = document.getElementById('galleryImage');
+  var currentFiles = Array.from(inputElement.files);
+  var updatedFiles = currentFiles.filter(function (f) {
+      return f !== file;
+  });
+
+  // Create a new FileList and assign it to the input element
+  var newFileList = new DataTransfer();
+  updatedFiles.forEach(function (f) {
+      newFileList.items.add(f);
+  });
+  inputElement.files = newFileList.files;
+}
+
+document.getElementById('galleryImage').addEventListener('change', previewImages);
+
+  }

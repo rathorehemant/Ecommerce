@@ -28,7 +28,14 @@
             @foreach($products as $product)
             <tr>
                 <td>{{ ucfirst($product->title) }}</td>
-                <td><img src="{{ $product->image }}" class="img-thumbnail" height = "150" width = "130" alt="Product Image"></td>
+                <td>
+                @if($product->image && file_exists(public_path($product->image)))
+                    <img src="{{ $product->image }}" class="img-thumbnail" height="150" width="130" alt="Product Image">
+                @else
+                    <img src="{{ asset('assets/blank_image/blank.jpg') }}" class="img-thumbnail" height="100" width="100" alt="Alternative Image">
+                @endif
+            </td>
+
                 <td>{{ $product->slug }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->created_at }}</td>

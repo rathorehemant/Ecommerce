@@ -10,7 +10,8 @@
   <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
   <script src="../assets/js/dashboard.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.all.min.js"></script>
+  <script src="https://cdn.tiny.cloud/1/oez5v9fmkk2rjl1yv4chr0b7pwacwex7kf19zl6fa731gcan/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
   <script src="{{ asset('assets/js/custom.js')}}"></script>
-</body>
+  </body>
 <!-- Mirrored from themewagon.github.io/Modernize/src/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 21 Dec 2023 12:14:47 GMT -->
 </html>

@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string('image');
             $table->text('gallary_image')->nullable();
             $table->double('price');
-            $table->text('categoryId')->nullable();
+            $table->text('categoryId');
+            $table->text('description');
+            $table->string('stocks');
             $table->timestamps();
         });
     }
