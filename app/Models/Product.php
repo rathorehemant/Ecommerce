@@ -29,4 +29,12 @@ class Product extends Model
         }
     });
     }
+
+
+    public function getProductDetailsByProductId($product_id){
+        return $this->select('products.*','product_categories.title as categoryName')
+        ->join('product_categories', 'product_categories.id', '=', 'categoryId')
+        ->where('products.id', '=', $product_id)
+        ->get();
+    }
 }

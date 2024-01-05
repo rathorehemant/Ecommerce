@@ -24,6 +24,8 @@ Route::get('/products/add-categories', [ProductController::class, 'productsCateg
 Route::post('/save-products', [ProductController::class, 'saveProducts'])->name('product.save');
 Route::post('/products/save-categories', [ProductController::class, 'saveproductsCategory'])->name('product.category.save');
 Route::delete('/delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('product.delete');
-Route::delete('/delete-product-category/{id}', [ProductController::class, 'deleteProductCategory'])->name('product.delete');
+Route::delete('/delete-product-category/{id}', [ProductController::class, 'deleteProductCategory'])->name('product.category.delete');
+Route::get('/products/view-product/{id}', [ProductController::class, 'singleProductView'])->name('product.view');
+
 
 
