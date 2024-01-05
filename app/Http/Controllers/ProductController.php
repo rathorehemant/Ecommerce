@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+    protected $productModel;
+
+    // Constructor
+    public function __construct(Product $Product)
+    {
+        $this->productModel = $Product;
+    }
+
     public function productsListing(){
         $products = Product::orderBy('id', 'desc')->get();
         return view('productListing',['products'=>$products]);
@@ -119,7 +127,7 @@ class ProductController extends Controller
 
     public function deleteProduct($product_id){
 
-        // first find the product category is valid or not
+        // first find the product id is valid or not
         $find_product_id = Product::find($product_id);
         if(!empty($find_product_id)){
             if($find_product_id->delete()){
@@ -172,5 +180,18 @@ class ProductController extends Controller
 
         return response()->json($return_data);
         
+    }
+
+
+    public function singleProductView($product_id){
+        // first find the product id is valid or not
+        $find_product_id = Product::find($product_id);
+        if(!empty($find_product_id)){
+            $productDetails =  $this->productModel->getProductDetailsByProductId($product_id);
+            return view('singleProduct',['productDetails' =>$productDetails]);
+        }else{
+            return redirect('products')->with('error', 'Sorry This Product id does not exist in our database');
+        }
+
     }
 }

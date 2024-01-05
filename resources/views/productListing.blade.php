@@ -20,6 +20,7 @@
                 <th>Image</th>
                 <th>Product Slug</th>
                 <th>Price</th>
+                <th>Stocks</th>
                 <th>Added On</th>
                 <th>Action</th>
             </tr>
@@ -38,8 +39,11 @@
 
                 <td>{{ $product->slug }}</td>
                 <td>{{ $product->price }}</td>
+                <td>{{ $product->stocks }}</td>
                 <td>{{ $product->created_at }}</td>
-                <td><i class="fa-solid fa-trash delete_product"  data-csrf-token = "{{ csrf_token() }}" data-product-id = "{{$product->id}}"></i></td>
+                <td><i class="fa-solid fa-trash delete_product"  data-csrf-token = "{{ csrf_token() }}" data-product-id = "{{$product->id}}"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href = "{{ route('product.view',['id'=>$product->id])}}"> <i class="fa-regular fa-eye"></i></a>
+              </td>
             </tr>
            @endforeach
         </tbody>
